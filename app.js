@@ -302,6 +302,8 @@
       opt.dataset.admin1 = "";
       opt.dataset.country = "";
       sel.appendChild(opt);
+      opt.selected = true;
+      sel.selectedIndex = 0;
     }
   }
 
@@ -324,6 +326,8 @@
         opt.dataset.admin1 = f.admin1 || "";
         opt.dataset.country = f.country || "";
         sel.appendChild(opt);
+        opt.selected = true;
+        sel.selectedIndex = 0;
         showView("dash");
         $("btnLoad").click();
       });
@@ -1016,6 +1020,8 @@
         opt.dataset.admin1 = f.admin1 || "";
         opt.dataset.country = f.country || "";
         sel.appendChild(opt);
+        opt.selected = true;
+        sel.selectedIndex = 0;
         showView("dash");
         $("btnLoad").click();
       });
@@ -1757,6 +1763,8 @@
         opt.dataset.admin1 = f.admin1 || "";
         opt.dataset.country = f.country || "";
         sel.appendChild(opt);
+        opt.selected = true;
+        sel.selectedIndex = 0;
         showView("dash");
         $("btnLoad").click();
       });
