@@ -1,5 +1,5 @@
 /* SurfScope service worker */
-const CACHE = "surfscope-v4-2-1";
+const CACHE = "surfscope-v4-2-2";
 const ASSETS = [
   "./",
   "./index.html",

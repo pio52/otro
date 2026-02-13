@@ -307,6 +307,30 @@
     }
   }
 
+
+  function loadPinnedNow(){
+    if (!(Number.isFinite(pinned.lat) && Number.isFinite(pinned.lon))){
+      setStatus(t("selectResultFirst"), "bad");
+      return;
+    }
+    // Prefer direct loader if present
+    if (typeof loadByCoords === "function"){
+      loadByCoords(pinned.lat, pinned.lon, "Pinned");
+      return;
+    }
+    // Fallback: ensure selection exists then click Load
+    setPinned(pinned.lat, pinned.lon);
+    const sel = $("results");
+    if (sel && sel.options && sel.options.length){
+      sel.selectedIndex = 0;
+      sel.dispatchEvent(new Event('change', { bubbles: true }));
+      showView("dash");
+      $("btnLoad").click();
+    } else {
+      setStatus(t("selectResultFirst"), "bad");
+    }
+  }
+
   function renderFavoriteMarkers(){
     if (!mapObj || !favLayer) return;
     favLayer.clearLayers();
@@ -383,15 +407,8 @@
 
     const btnLoadPinned = $("btnMapLoad");
     if (btnLoadPinned){
-      btnLoadPinned.addEventListener("click", () => {
-        if (Number.isFinite(pinned.lat) && Number.isFinite(pinned.lon)){
-          setPinned(pinned.lat, pinned.lon);
-          showView("dash");
-          $("btnLoad").click();
-        } else {
-          showView("dash");
-        }
-      });
+      btnLoadPinned.addEventListener("click", () => { loadPinnedNow(); });
+
     }
 
     renderFavoriteMarkers();
